@@ -19,4 +19,12 @@ class ShoppingCart
         @products.sum { |product| product.quantity}
     end
 
+    def is_full?
+        if @capacity == total_number_of_products
+            true
+        else 
+            false
+        end
+    end
+
 end
