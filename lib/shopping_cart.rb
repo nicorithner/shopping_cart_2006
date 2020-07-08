@@ -20,11 +20,17 @@ class ShoppingCart
     end
 
     def is_full?
-        if @capacity == total_number_of_products
+        if total_number_of_products >= @capacity
             true
         else 
             false
         end
+    end
+
+    def products_by_category(category)
+        # binding.pry
+        @products.find_all {|p| p.category == :paper}
+
     end
 
 end
