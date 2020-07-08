@@ -14,4 +14,9 @@ class ShoppingCart
       cart_details = {name: @name, capacity: @capacity}
     end
 
+    def total_number_of_products
+        # binding.pry
+        @products.sum { |product| product.quantity}
+    end
+
 end
