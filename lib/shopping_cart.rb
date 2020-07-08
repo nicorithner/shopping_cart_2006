@@ -15,7 +15,6 @@ class ShoppingCart
     end
 
     def total_number_of_products
-        # binding.pry
         @products.sum { |product| product.quantity}
     end
 
@@ -28,7 +27,6 @@ class ShoppingCart
     end
 
     def products_by_category(category)
-        # binding.pry
         @products.find_all {|p| p.category == :paper}
 
     end
