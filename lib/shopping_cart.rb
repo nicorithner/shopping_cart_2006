@@ -27,8 +27,24 @@ class ShoppingCart
     end
 
     def products_by_category(category)
-        @products.find_all {|p| p.category == :paper}
-
+        @products.find_all {|p| p.category == category}
     end
 
+    def percentage_occupied
+        ((total_number_of_products.to_f / @capacity) * 100).round(2)
+    end
+
+    def sorted_products_by_quantity
+        @products.sort_by do |product|
+            product.quantity
+        end
+    end
+
+    def product_breakdown
+        output = {}
+            @products.each do |product|
+                output[product.category] = product
+            end 
+        output.sort.to_h
+    end
 end
