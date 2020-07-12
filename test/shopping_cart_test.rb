@@ -42,7 +42,6 @@ class ShoppingCartTest < Minitest::Test
     cart.add_product(product3)
 
     assert_equal 13, cart.total_number_of_products
-    assert_equal false, cart.is_full?
   end
 
   def test_cart_can_be_full
@@ -93,22 +92,22 @@ class ShoppingCartTest < Minitest::Test
     product4 = Product.new(:produce, 'apples', 0.99, '20')
     cart.add_product(product4)
 
-    assert_equal [product3, product2, product1, product4]  ,cart.sorted_products_by_quantity
+    assert_equal [product4, product1, product2, product3]  ,cart.sorted_products_by_quantity
   end
 
-  # def test_product_breakdown 
-  #   cart = ShoppingCart.new("King Soopers", "30items")
-  #   product1 = Product.new(:paper, 'toilet paper', 3.70, '10')
-  #   product2 = Product.new(:meat, 'chicken', 4.50, '2')
-  #   product3 = Product.new(:paper, 'tissue paper', 1.25, '1')
-  #   product4 = Product.new(:produce, 'apples', 0.99, '20')
+  def test_product_breakdown 
+    cart = ShoppingCart.new("King Soopers", "30items")
+    product1 = Product.new(:paper, 'toilet paper', 3.70, '10')
+    product2 = Product.new(:meat, 'chicken', 4.50, '2')
+    product3 = Product.new(:paper, 'tissue paper', 1.25, '1')
+    product4 = Product.new(:produce, 'apples', 0.99, '20')
 
-  #   cart.add_product(product1)
-  #   cart.add_product(product2)
-  #   cart.add_product(product3)
-  #   cart.add_product(product4)
-
-  #   expected = {:meat=>[product2], :paper=> [product1, product3], :produce=> [product4]}
-  #   assert_equal expected, cart.product_breakdown
-  # end
+    cart.add_product(product1)
+    cart.add_product(product2)
+    cart.add_product(product3)
+    cart.add_product(product4)
+# binding.pry
+    expected = {:meat=> [product2], :paper=> [product1, product3], :produce=> [product4]}
+    assert_equal expected, cart.product_breakdown
+  end
 end

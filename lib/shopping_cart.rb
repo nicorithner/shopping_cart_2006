@@ -2,7 +2,7 @@ class ShoppingCart
     attr_reader :name, :capacity, :products
     def initialize(name, capacity)
         @name = name
-        @capacity = capacity[0..1].to_i
+        @capacity = capacity.to_i
         @products = []
     end
     
@@ -11,7 +11,7 @@ class ShoppingCart
     end
 
     def details
-      cart_details = {name: @name, capacity: @capacity}
+      {name: @name, capacity: @capacity}
     end
 
     def total_number_of_products
@@ -19,11 +19,7 @@ class ShoppingCart
     end
 
     def is_full?
-        if total_number_of_products >= @capacity
-            true
-        else 
-            false
-        end
+        total_number_of_products > @capacity
     end
 
     def products_by_category(category)
@@ -37,14 +33,18 @@ class ShoppingCart
     def sorted_products_by_quantity
         @products.sort_by do |product|
             product.quantity
-        end
+        end.reverse
     end
 
     def product_breakdown
         output = {}
-            @products.each do |product|
-                output[product.category] = product
-            end 
-        output.sort.to_h
+            categories = @products.map do |product| 
+                product.category
+            end.uniq
+            categories.each do |category|
+                output[category] = products_by_category(category)
+            end
+        output
     end
+
 end
